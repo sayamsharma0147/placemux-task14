@@ -1,0 +1,84 @@
+{
+  "task": "Task 14 \u2014 Data Cluster Parameter Prep",
+  "timestamp": "2026-07-04T05:19:20.395274",
+  "seed": 42,
+  "dataset_rows": 4799,
+  "cluster_features": [
+    "q_len",
+    "q_word_count",
+    "avg_opt_len",
+    "max_opt_len",
+    "avg_word_len",
+    "q_to_avg_opt_ratio"
+  ],
+  "excluded_features": {
+    "difficulty_level": "supervised target \u2014 would leak label into clusters",
+    "domain_enc/topic_enc": "ordinal integers with no meaningful Euclidean distance",
+    "domain_avg_difficulty": "encodes supervised label indirectly \u2014 leakage",
+    "topic_avg_difficulty": "encodes supervised label indirectly \u2014 leakage",
+    "opt_len_range": "all values = 0 in this dataset (options have identical length) \u2014 zero variance, excluded"
+  },
+  "scaling": "StandardScaler \u2014 zero mean, unit variance",
+  "distance_sanity": {
+    "min": 0.0,
+    "max": 9.3919,
+    "ratio": Infinity,
+    "status": "\u26a0 high ratio"
+  },
+  "pca": {
+    "input_dims": 6,
+    "output_dims": 3,
+    "variance_retained": 0.9032,
+    "explained_per_pc": [
+      0.462,
+      0.2743,
+      0.1669
+    ]
+  },
+  "k_selection": {
+    "k_range": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "inertias": [
+      18137.79,
+      11400.8,
+      9197.11,
+      7693.05,
+      6742.27,
+      5842.12,
+      5348.82,
+      4908.89,
+      4550.96
+    ],
+    "sil_scores": [
+      0.4207,
+      0.4855,
+      0.3027,
+      0.3145,
+      0.3192,
+      0.3423,
+      0.2999,
+      0.2999,
+      0.3057
+    ],
+    "elbow_k": 3,
+    "best_sil_k": 3,
+    "best_sil_score": 0.4855,
+    "chosen_k": 3,
+    "justification": "Both elbow and silhouette agree on k=3. Silhouette=0.4855. Strong justification."
+  },
+  "locked_params": {
+    "chosen_k": 3,
+    "n_pca_components": 3,
+    "scaler": "StandardScaler",
+    "pca_variance_retained": 0.9032
+  }
+}
